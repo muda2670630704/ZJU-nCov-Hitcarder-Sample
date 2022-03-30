@@ -17,15 +17,20 @@ jobs:
             dingtalk_token: DINGTALK_TOKEN
             pushplus_token: PUSHPLUS_TOKEN
             serverchan_key: SERVERCHAN_KEY
-    steps:
+            steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: 'Set up Python'
+            uses: actions/setup-python@v2
+            with:
+              python-version: 3.9
+          - name: 'Install requirements'
+            run: pip3 install -r ./requirements.txt
           - name: Working
-   uses: ZJU-nCov-Hitcarder@master
-      with:
-         # zju account username(student  id).
-         username: ${{ secrets.ZJU_USERNAME }}
-         # zju account password.
-         password: ${{ secrets.ZJU_PASSWORD }}
-         # (optional) dingtalk_token.
-         dingtalk_token: ${{ secrets.DINGTALK_TOKEN }}
-         # (optional) serverchan_key.
-         serverchan_key: ${{ secrets.SERVERCHAN_KEY }}
+            env:
+              USERNAME: ${{ secrets[matrix.username] }}
+              PASSWORD: ${{ secrets[matrix.password] }}
+              DINGTALK_TOKEN: ${{ secrets[matrix.dingtalk_token] }}
+            run: |
+              python3 ./hitcarder.py
+            shell: bash
