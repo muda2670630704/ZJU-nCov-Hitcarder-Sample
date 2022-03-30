@@ -1,9 +1,9 @@
-name: 'ZJU-nCov-Hitcarder Action'
+name: ZJU-nCov-Hitcarder Sample
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '11 21 * * *'
+    - cron: "30 2 * * *"
 
 jobs:
   main:
@@ -17,20 +17,15 @@ jobs:
             dingtalk_token: DINGTALK_TOKEN
             pushplus_token: PUSHPLUS_TOKEN
             serverchan_key: SERVERCHAN_KEY
-            steps:
-          - name: Checkout
-            uses: actions/checkout@v2
-          - name: 'Set up Python'
-            uses: actions/setup-python@v2
-            with:
-              python-version: 3.9
-          - name: 'Install requirements'
-            run: pip3 install -r ./requirements.txt
+   steps:
           - name: Working
-            env:
-              USERNAME: ${{ secrets[matrix.username] }}
-              PASSWORD: ${{ secrets[matrix.password] }}
-              DINGTALK_TOKEN: ${{ secrets[matrix.dingtalk_token] }}
-            run: |
-              python3 ./hitcarder.py
-            shell: bash
+   uses:  muda2670630704 /zju-ncov-hitcarder@0.0.x
+      with:
+         # zju account username(student  id).
+         username: ${{ secrets.ZJU_USERNAME }}
+         # zju account password.
+         password: ${{ secrets.ZJU_PASSWORD }}
+         # (optional) dingtalk_token.
+         dingtalk_token: ${{ secrets.DINGTALK_TOKEN }}
+         # (optional) serverchan_key.
+         serverchan_key: ${{ secrets.SERVERCHAN_KEY }}
