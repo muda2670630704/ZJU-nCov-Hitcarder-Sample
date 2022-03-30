@@ -19,7 +19,7 @@ jobs:
             serverchan_key: SERVERCHAN_KEY
    steps:
           - name: Working
-   uses:  muda2670630704 /zju-ncov-hitcarder@0.0.x
+   uses:  muda2670630704/zju-ncov-hitcarder@0.0.x
       with:
          # zju account username(student  id).
          username: ${{ secrets.ZJU_USERNAME }}
